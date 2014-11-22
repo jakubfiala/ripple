@@ -21,5 +21,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     protected:
         Button buttons[28][16];
+        Button play;
+        Boolean playback;
 		
 };

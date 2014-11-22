@@ -14,11 +14,12 @@ class Button {
         Boolean checkIfOn();
         void toggleButton();
         void lightUp();
-        void create(float pX, float pY, float w, float h);
+        void create(float pX, float pY, float w, float h, string t);
         void display();
     
     protected:
         float posX, posY, width, height;
         Boolean isOn;
+        string type;
     
 };

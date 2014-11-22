@@ -6,8 +6,11 @@ void ofApp::setup(){
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
             buttons[x][y] = *new Button;
-            buttons[x][y].create(25+x*35, 30+y*35, 30, 30);
+            buttons[x][y].create(25+x*35, 45+y*35, 30, 30, "rect");
         }
+    play = *new Button;
+    play.create(25, 5, 30, 30, "tri");
+    playback = false;
 }
 
 //--------------------------------------------------------------
@@ -21,6 +24,7 @@ void ofApp::draw(){
         for (int y = 0; y < 16; y++) {
             buttons[x][y].display();
         }
+    play.display();
 }
 
 //--------------------------------------------------------------
@@ -40,22 +44,31 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int mx, int my, int button){
-    for(int x = 0; x < 28; x++)
-        for (int y = 0; y < 16; y++) {
-            if (buttons[x][y].checkIfPressed(mx, my) && !buttons[x][y].checkIfOn()) {
-                buttons[x][y].toggleButton();
-            };
-        }
+    if (!playback) {
+        for(int x = 0; x < 28; x++)
+            for (int y = 0; y < 16; y++) {
+                if (buttons[x][y].checkIfPressed(mx, my) && !buttons[x][y].checkIfOn()) {
+                    buttons[x][y].toggleButton();
+                };
+            }
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int mx, int my, int button){
-    for(int x = 0; x < 28; x++)
-        for (int y = 0; y < 16; y++) {
-            if (buttons[x][y].checkIfPressed(mx, my)) {
-                buttons[x][y].toggleButton();
-            };
-        }
+    if (!playback) {
+        for(int x = 0; x < 28; x++)
+            for (int y = 0; y < 16; y++) {
+                if (buttons[x][y].checkIfPressed(mx, my)) {
+                    buttons[x][y].toggleButton();
+                };
+            }
+    }
+    
+    if (play.checkIfPressed(mx, my)) {
+        play.toggleButton();
+        playback = !playback;
+    };
 
 }
 
