@@ -39,8 +39,13 @@ void ofApp::mouseMoved(int x, int y ){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
+void ofApp::mouseDragged(int mx, int my, int button){
+    for(int x = 0; x < 28; x++)
+        for (int y = 0; y < 16; y++) {
+            if (buttons[x][y].checkIfPressed(mx, my) && !buttons[x][y].checkIfOn()) {
+                buttons[x][y].toggleButton();
+            };
+        }
 }
 
 //--------------------------------------------------------------
@@ -48,7 +53,6 @@ void ofApp::mousePressed(int mx, int my, int button){
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
             if (buttons[x][y].checkIfPressed(mx, my)) {
-                printf("prd \n");
                 buttons[x][y].toggleButton();
             };
         }

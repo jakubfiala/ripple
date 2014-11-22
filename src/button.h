@@ -11,6 +11,7 @@
 class Button {
     public:
         Boolean checkIfPressed(float pX, float pY);
+        Boolean checkIfOn();
         void toggleButton();
         void lightUp();
         void create(float pX, float pY, float w, float h);

@@ -37,6 +37,10 @@ void Button::toggleButton() {
     isOn = !isOn;
 }
 
+Boolean Button::checkIfOn() {
+    return isOn;
+}
+
 
 
 
