@@ -23,5 +23,6 @@ class ofApp : public ofBaseApp{
         Button buttons[28][16];
         Button play;
         Boolean playback;
+        ofTrueTypeFont text;
 		
 };

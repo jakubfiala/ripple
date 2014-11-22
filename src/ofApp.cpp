@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(200);
+    //create buttons
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
             buttons[x][y] = *new Button;
@@ -11,6 +12,12 @@ void ofApp::setup(){
     play = *new Button;
     play.create(25, 5, 30, 30, "tri");
     playback = false;
+    
+    //load font and stuff
+    text.loadFont("verdana.ttf",20,true,true);
+    text.setLineHeight(25.0f);
+    text.setLetterSpacing(1.037);
+    
 }
 
 //--------------------------------------------------------------
@@ -25,6 +32,7 @@ void ofApp::draw(){
             buttons[x][y].display();
         }
     play.display();
+    text.drawString("RIPPLE", 900, 35);
 }
 
 //--------------------------------------------------------------
@@ -74,6 +82,7 @@ void ofApp::mousePressed(int mx, int my, int button){
                 };
             }
     }
+    
     
     if (play.checkIfPressed(mx, my)) {
         play.toggleButton();
