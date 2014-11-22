@@ -18,8 +18,8 @@ class Button {
         void display();
     
     protected:
-        float posX, posY, width, height;
-        Boolean isOn;
+        float posX, posY, width, height, alpha;
+        Boolean isOn, litUp;
         string type;
     
 };

@@ -57,10 +57,20 @@ void ofApp::mouseDragged(int mx, int my, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int mx, int my, int button){
     if (!playback) {
+        //turn on the corresponding button
         for(int x = 0; x < 28; x++)
             for (int y = 0; y < 16; y++) {
                 if (buttons[x][y].checkIfPressed(mx, my)) {
                     buttons[x][y].toggleButton();
+                };
+            }
+    }
+    else {
+        //begin the ripple
+        for(int x = 0; x < 28; x++)
+            for (int y = 0; y < 16; y++) {
+                if (buttons[x][y].checkIfPressed(mx, my)) {
+                    buttons[x][y].lightUp();
                 };
             }
     }
@@ -73,8 +83,10 @@ void ofApp::mousePressed(int mx, int my, int button){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
+void ofApp::mouseReleased(int mx, int my, int button){
+    if (playback) {
+        
+    }
 }
 
 //--------------------------------------------------------------
