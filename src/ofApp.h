@@ -25,6 +25,12 @@ class ofApp : public ofBaseApp{
         Boolean playback;
         ofTrueTypeFont text;
         double startTime, bpm;
+        struct wave {
+            Boolean isOn;
+            int startX;
+            int startY;
+            int iteration;
+        } newWave;
         void beat();
         double getBeatTime(double tempo);
 		

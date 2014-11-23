@@ -21,7 +21,8 @@ void ofApp::setup(){
     
     //init time stuff
     startTime = 0.0;
-    bpm = 180;
+    bpm = 120;
+    newWave.isOn = false;
     
 }
 
@@ -44,7 +45,23 @@ void ofApp::draw(){
 }
 
 void ofApp::beat() {
-    printf("beat \n");
+    printf("%i",newWave.iteration);
+    if (newWave.isOn) {
+        if (newWave.iteration < 14) {
+            newWave.iteration++;
+            for(int x = 0; x < 28; x++)
+                for (int y = 0; y < 16; y++) {
+                    //monstrous statement to select buttons corresponding to the current iteration
+                    if (((x <= newWave.startX + newWave.iteration) && (x >= newWave.startX - newWave.iteration)) && ((y <= newWave.startY + newWave.iteration) && (y >= newWave.startY - newWave.iteration)) && !(((x < newWave.startX + newWave.iteration) && (x > newWave.startX - newWave.iteration)) && ((y < newWave.startY + newWave.iteration) && (y > newWave.startY - newWave.iteration)))) {
+                        
+                        buttons[x][y].lightUp();
+                    }
+                }
+        }
+        else {
+            newWave.isOn = false;
+        }
+    }
 }
 
 double ofApp::getBeatTime(double tempo) {
@@ -95,6 +112,10 @@ void ofApp::mousePressed(int mx, int my, int button){
             for (int y = 0; y < 16; y++) {
                 if (buttons[x][y].checkIfPressed(mx, my)) {
                     buttons[x][y].lightUp();
+                    newWave.isOn = true;
+                    newWave.startX = x;
+                    newWave.startY = y;
+                    newWave.iteration = 0;
                 };
             }
     }
@@ -110,9 +131,7 @@ void ofApp::mousePressed(int mx, int my, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int mx, int my, int button){
-    if (playback) {
-        
-    }
+
 }
 
 //--------------------------------------------------------------
