@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(200);
+    
     //create buttons
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
@@ -17,6 +18,10 @@ void ofApp::setup(){
     text.loadFont("verdana.ttf",20,true,true);
     text.setLineHeight(25.0f);
     text.setLetterSpacing(1.037);
+    
+    //init time stuff
+    startTime = 0.0;
+    bpm = 180;
     
 }
 
@@ -33,6 +38,17 @@ void ofApp::draw(){
         }
     play.display();
     text.drawString("RIPPLE", 900, 35);
+    if (playback && fmod((ofGetElapsedTimeMillis() - startTime), getBeatTime(bpm)) <= 10.0) {
+        beat();
+    }
+}
+
+void ofApp::beat() {
+    printf("beat \n");
+}
+
+double ofApp::getBeatTime(double tempo) {
+    return 60000/tempo;
 }
 
 //--------------------------------------------------------------
@@ -87,6 +103,7 @@ void ofApp::mousePressed(int mx, int my, int button){
     if (play.checkIfPressed(mx, my)) {
         play.toggleButton();
         playback = !playback;
+        startTime = ofGetElapsedTimeMillis();
     };
 
 }

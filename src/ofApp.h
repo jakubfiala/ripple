@@ -24,5 +24,8 @@ class ofApp : public ofBaseApp{
         Button play;
         Boolean playback;
         ofTrueTypeFont text;
+        double startTime, bpm;
+        void beat();
+        double getBeatTime(double tempo);
 		
 };
