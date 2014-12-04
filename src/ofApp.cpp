@@ -1,12 +1,3 @@
-/* This is an example of how to integrate maximilain into openFrameworks,
- including using audio received for input and audio requested for output.
- 
- 
- You can copy and paste this and use it as a starting example.
- 
- */
-
-
 #include "ofApp.h"
 
 
@@ -14,8 +5,6 @@
 //-------------------------------------------------------------
 ofApp::~ofApp() {
     
-    /*you should probably delete myData for any sample object
-     that you've created in ofApp.h*/
     
 }
 
@@ -48,6 +37,7 @@ void ofApp::setup(){
     startTime = 0.0;
     bpm = 120;
     newWave.isOn = false;
+    ptime = time = 0;
     
     
     sampleRate 			= 44100; /* Sampling Rate */
@@ -71,14 +61,9 @@ void ofApp::draw(){
         }
     play.display();
     text.drawString("RIPPLE", 900, 35);
-    if (playback && fmod((ofGetElapsedTimeMillis() - startTime), getBeatTime(bpm)) <= 10.0) {
-        beatp();
-    }
-    
 }
 
-void ofApp::beatp() {
-    printf("%i",newWave.iteration);
+void ofApp::beat() {
     if (newWave.isOn) {
         if (newWave.iteration < 14) {
             newWave.iteration++;
@@ -106,10 +91,32 @@ double ofApp::getBeatTime(double tempo) {
 //--------------------------------------------------------------
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
+    
+    
+    //search for playing voices (once per buffer)
+
+    for (int i = 0; i < sizeof(voices); i++) {
+        if (voices[i].isOn) {
+            
+        }
+    }
+    
+    //run timer with a phasor
+    time = timer.phasor(64, 0, 16);
+    //check if we should play on-beat
+    if (playback && time != ptime && ptime != 16) {
+        beat();
+    }
+    //previous time will be current time next time
+    ptime = time;
+    
     for (int i = 0; i < bufferSize; i++){
         
         
+        //mix.stereo(, <#double *two#>, <#double x#>)
         
+        output[i*nChannels] = outputs[0];
+        output[i*nChannels+1] = outputs[1];
         
     }
     

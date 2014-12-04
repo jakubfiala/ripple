@@ -4,13 +4,14 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
+#include "ofxGui.h"
 #include "button.h"
 
 
 class ofApp : public ofBaseApp{
     
 public:
-    ~ofApp();/* deconsructor is very useful */
+    ~ofApp();
     void setup();
     void update();
     void draw();
@@ -23,19 +24,15 @@ public:
     void mouseReleased(int x, int y, int button);
     void windowResized(int w, int h);
     
-    void audioRequested 	(float * input, int bufferSize, int nChannels); /* output method */
-    void audioReceived 	(float * input, int bufferSize, int nChannels); /* input method */
+    void audioRequested 	(float * input, int bufferSize, int nChannels);
+    void audioReceived 	(float * input, int bufferSize, int nChannels);
     
-    int		initialBufferSize; /* buffer size */
+    int		initialBufferSize;
     int		sampleRate;
     
+    double outputs[2];
+    ofxMaxiMix mix;
     
-    /* stick you maximilian stuff below */
-    
-    double wave,sample,outputs[2];
-    ofxMaxiMix mymix;
-    ofxMaxiOsc sine1;
-    ofxMaxiSample beats,beat;
     
 protected:
     Button buttons[28][16];
@@ -49,9 +46,17 @@ protected:
         int startY;
         int iteration;
     } newWave;
-    void beatp();
+    void beat();
     double getBeatTime(double tempo);
-    
+    struct voice {
+        maxiOsc osc;
+        maxiEnv env;
+        double vol;
+        Boolean isOn;
+    };
+    maxiOsc timer;
+    int time, ptime;
+    voice voices[64];
 };
 
 #endif

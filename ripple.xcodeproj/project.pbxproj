@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3B0A436A1A2CB98A000ADA46 /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0A43691A2CB98A000ADA46 /* button.cpp */; };
+		3BECC8141A308EA6004798CA /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8031A308EA6004798CA /* ofxBaseGui.cpp */; };
+		3BECC8151A308EA6004798CA /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8051A308EA6004798CA /* ofxButton.cpp */; };
+		3BECC8161A308EA6004798CA /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8081A308EA6004798CA /* ofxGuiGroup.cpp */; };
+		3BECC8171A308EA6004798CA /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC80A1A308EA6004798CA /* ofxLabel.cpp */; };
+		3BECC8181A308EA6004798CA /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC80C1A308EA6004798CA /* ofxPanel.cpp */; };
+		3BECC8191A308EA6004798CA /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC80E1A308EA6004798CA /* ofxSlider.cpp */; };
+		3BECC81A1A308EA6004798CA /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8101A308EA6004798CA /* ofxSliderGroup.cpp */; };
+		3BECC81B1A308EA6004798CA /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8121A308EA6004798CA /* ofxToggle.cpp */; };
 		89216F2E336E392DAB4E2E01 /* fft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51EA81D34EFD54EDA503224B /* fft.cpp */; };
 		909DC438310CD79EB64AD0C9 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 73524E54A29CA34C55630181 /* stb_vorbis.c */; };
 		91BB8D19062BCB83D9A1801C /* maxiMFCC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3554EEC1E3147367FC87FC45 /* maxiMFCC.cpp */; };
@@ -74,6 +82,23 @@
 		3554EEC1E3147367FC87FC45 /* maxiMFCC.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = maxiMFCC.cpp; path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxMaxim/libs/maxiMFCC.cpp; sourceTree = SOURCE_ROOT; };
 		3B0A43681A2CB98A000ADA46 /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
 		3B0A43691A2CB98A000ADA46 /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
+		3BECC8031A308EA6004798CA /* ofxBaseGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
+		3BECC8041A308EA6004798CA /* ofxBaseGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
+		3BECC8051A308EA6004798CA /* ofxButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButton.cpp; sourceTree = "<group>"; };
+		3BECC8061A308EA6004798CA /* ofxButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxButton.h; sourceTree = "<group>"; };
+		3BECC8071A308EA6004798CA /* ofxGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGui.h; sourceTree = "<group>"; };
+		3BECC8081A308EA6004798CA /* ofxGuiGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGuiGroup.cpp; sourceTree = "<group>"; };
+		3BECC8091A308EA6004798CA /* ofxGuiGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGuiGroup.h; sourceTree = "<group>"; };
+		3BECC80A1A308EA6004798CA /* ofxLabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLabel.cpp; sourceTree = "<group>"; };
+		3BECC80B1A308EA6004798CA /* ofxLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxLabel.h; sourceTree = "<group>"; };
+		3BECC80C1A308EA6004798CA /* ofxPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPanel.cpp; sourceTree = "<group>"; };
+		3BECC80D1A308EA6004798CA /* ofxPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxPanel.h; sourceTree = "<group>"; };
+		3BECC80E1A308EA6004798CA /* ofxSlider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSlider.cpp; sourceTree = "<group>"; };
+		3BECC80F1A308EA6004798CA /* ofxSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSlider.h; sourceTree = "<group>"; };
+		3BECC8101A308EA6004798CA /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSliderGroup.cpp; sourceTree = "<group>"; };
+		3BECC8111A308EA6004798CA /* ofxSliderGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
+		3BECC8121A308EA6004798CA /* ofxToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
+		3BECC8131A308EA6004798CA /* ofxToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
 		4B579DBD159A2474DB555E97 /* ofxMaxim.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMaxim.h; path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxMaxim/src/ofxMaxim.h; sourceTree = SOURCE_ROOT; };
 		51EA81D34EFD54EDA503224B /* fft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = fft.cpp; path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxMaxim/libs/fft.cpp; sourceTree = SOURCE_ROOT; };
 		54D76CEDC9B17946581FB614 /* sineTable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = sineTable.h; path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxMaxim/libs/sineTable.h; sourceTree = SOURCE_ROOT; };
@@ -137,6 +162,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BECC8011A308EA6004798CA /* ofxGui */ = {
+			isa = PBXGroup;
+			children = (
+				3BECC8021A308EA6004798CA /* src */,
+			);
+			name = ofxGui;
+			sourceTree = "<group>";
+		};
+		3BECC8021A308EA6004798CA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3BECC8031A308EA6004798CA /* ofxBaseGui.cpp */,
+				3BECC8041A308EA6004798CA /* ofxBaseGui.h */,
+				3BECC8051A308EA6004798CA /* ofxButton.cpp */,
+				3BECC8061A308EA6004798CA /* ofxButton.h */,
+				3BECC8071A308EA6004798CA /* ofxGui.h */,
+				3BECC8081A308EA6004798CA /* ofxGuiGroup.cpp */,
+				3BECC8091A308EA6004798CA /* ofxGuiGroup.h */,
+				3BECC80A1A308EA6004798CA /* ofxLabel.cpp */,
+				3BECC80B1A308EA6004798CA /* ofxLabel.h */,
+				3BECC80C1A308EA6004798CA /* ofxPanel.cpp */,
+				3BECC80D1A308EA6004798CA /* ofxPanel.h */,
+				3BECC80E1A308EA6004798CA /* ofxSlider.cpp */,
+				3BECC80F1A308EA6004798CA /* ofxSlider.h */,
+				3BECC8101A308EA6004798CA /* ofxSliderGroup.cpp */,
+				3BECC8111A308EA6004798CA /* ofxSliderGroup.h */,
+				3BECC8121A308EA6004798CA /* ofxToggle.cpp */,
+				3BECC8131A308EA6004798CA /* ofxToggle.h */,
+			);
+			name = src;
+			path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxGui/src;
+			sourceTree = "<group>";
+		};
 		4ACC32F17B7623DA048865D1 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +237,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				3BECC8011A308EA6004798CA /* ofxGui */,
 				6234D3BCE87D1C3BA2230F19 /* ofxMaxim */,
 			);
 			name = addons;
@@ -355,11 +414,19 @@
 				3B0A436A1A2CB98A000ADA46 /* button.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				89216F2E336E392DAB4E2E01 /* fft.cpp in Sources */,
+				3BECC8171A308EA6004798CA /* ofxLabel.cpp in Sources */,
 				D0D294DCABFDCEE0804A6D35 /* maxiAtoms.cpp in Sources */,
 				C57B55428E586B7879C8B2E3 /* maxiFFT.cpp in Sources */,
 				A94113642CF691896DF40A29 /* maxiGrains.cpp in Sources */,
+				3BECC8181A308EA6004798CA /* ofxPanel.cpp in Sources */,
+				3BECC8151A308EA6004798CA /* ofxButton.cpp in Sources */,
 				91BB8D19062BCB83D9A1801C /* maxiMFCC.cpp in Sources */,
+				3BECC81B1A308EA6004798CA /* ofxToggle.cpp in Sources */,
+				3BECC8161A308EA6004798CA /* ofxGuiGroup.cpp in Sources */,
+				3BECC81A1A308EA6004798CA /* ofxSliderGroup.cpp in Sources */,
 				DC74C3C011513049DC93DFC6 /* maximilian.cpp in Sources */,
+				3BECC8141A308EA6004798CA /* ofxBaseGui.cpp in Sources */,
+				3BECC8191A308EA6004798CA /* ofxSlider.cpp in Sources */,
 				909DC438310CD79EB64AD0C9 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +595,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -613,6 +681,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

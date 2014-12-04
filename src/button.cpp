@@ -17,7 +17,7 @@ void Button::display() {
     }
     else {
         //default type is rect
-        if (isOn) {
+        if (isOn){
             ofSetColor(255);
             ofRect(posX, posY, width, height);
         }
