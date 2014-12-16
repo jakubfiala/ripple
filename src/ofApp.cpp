@@ -18,6 +18,9 @@ void ofApp::setup(){
     ofBackground(200);
     ofSetVerticalSync(true);
     
+    //create UI
+    //gui = new ofxUICanvas();
+    
     //create buttons
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
@@ -46,7 +49,14 @@ void ofApp::setup(){
     initialBufferSize	= 512;
     
     
-    ofSoundStreamSetup(2,0,this, sampleRate, initialBufferSize, 4);}
+    ofSoundStreamSetup(2,0,this, sampleRate, initialBufferSize, 4);
+    
+    
+   /* gui->addSlider("BACKGROUND",0.0,255.0,100.0);
+    gui->autoSizeToFitWidgets();
+    ofAddListener(gui->newGUIEvent, this, &ofApp::guiEvent);
+    gui->loadSettings("settings.xml");*/
+}
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -152,7 +162,12 @@ void ofApp::audioReceived 	(float * input, int bufferSize, int nChannels){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
+    if (key == 32) {
+        play.toggleButton();
+        playback = !playback;
+        startTime = ofGetElapsedTimeMillis();
+    }
+        
 }
 
 //--------------------------------------------------------------
@@ -222,4 +237,19 @@ void ofApp::mouseReleased(int x, int y, int button){
 void ofApp::windowResized(int w, int h){
     
 }
+
+/*void ofApp::exit()
+{
+    gui->saveSettings("settings.xml");
+    delete gui;
+}
+
+void ofApp::guiEvent(ofxUIEventArgs &e)
+{
+    if(e.getName() == "BACKGROUND")
+    {
+        ofxUISlider *slider = e.getSlider();
+        ofBackground(slider->getScaledValue());
+    }
+}*/
 

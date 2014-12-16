@@ -4,7 +4,7 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
-#include "ofxGui.h"
+#include "ofxUI.h"
 #include "button.h"
 #include "voice.h"
 #include <deque>
@@ -35,8 +35,13 @@ public:
     double outputs[2];
     ofxMaxiMix mix;
     
+    //void exit();
+   // void guiEvent(ofxUIEventArgs &e);
+    
     
 protected:
+   // ofxUICanvas *gui;
+    
     Button buttons[28][16];
     Button play;
     Boolean playback;
