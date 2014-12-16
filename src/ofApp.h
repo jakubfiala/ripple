@@ -6,6 +6,8 @@
 #include "ofxMaxim.h"
 #include "ofxGui.h"
 #include "button.h"
+#include "voice.h"
+#include <deque>
 
 
 class ofApp : public ofBaseApp{
@@ -48,15 +50,13 @@ protected:
     } newWave;
     void beat();
     double getBeatTime(double tempo);
-    struct voice {
-        maxiOsc osc;
-        maxiEnv env;
-        double vol;
-        Boolean isOn;
-    };
-    maxiOsc timer;
-    int time, ptime;
-    voice voices[64];
+    maxiOsc timer, synth;
+    int time, ptime, voiceCount, curNote;
+    maxiEnvelope adsr;
+    convert converter;
+    deque<Voice> voices;
+    double adsrData[8] = {0,1,1.0,20,0.125,125,0,500};
+    
 };
 
 #endif

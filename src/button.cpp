@@ -40,7 +40,7 @@ void Button::display() {
     ofFill();
 }
 
-void Button::create(float pX, float pY, float w, float h, string t) {
+void Button::create(float pX, float pY, float w, float h, string t, int n) {
     posX = pX;
     posY = pY;
     width = w;
@@ -49,6 +49,7 @@ void Button::create(float pX, float pY, float w, float h, string t) {
     isOn = false;
     litUp = false;
     type = t;
+    note = n;
 }
 
 void Button::lightUp() {
@@ -71,6 +72,10 @@ void Button::toggleButton() {
 
 Boolean Button::checkIfOn() {
     return isOn;
+}
+
+int Button::getNote() {
+    return note;
 }
 
 

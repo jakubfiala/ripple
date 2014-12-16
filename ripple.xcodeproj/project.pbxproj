@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B0A436A1A2CB98A000ADA46 /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B0A43691A2CB98A000ADA46 /* button.cpp */; };
+		3B3572FB1A39CCAD008AECF9 /* voice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B3572F91A39CCAD008AECF9 /* voice.cpp */; };
 		3BECC8141A308EA6004798CA /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8031A308EA6004798CA /* ofxBaseGui.cpp */; };
 		3BECC8151A308EA6004798CA /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8051A308EA6004798CA /* ofxButton.cpp */; };
 		3BECC8161A308EA6004798CA /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BECC8081A308EA6004798CA /* ofxGuiGroup.cpp */; };
@@ -82,6 +83,8 @@
 		3554EEC1E3147367FC87FC45 /* maxiMFCC.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = maxiMFCC.cpp; path = ../../Downloads/of_v0.8.4_osx_release/addons/ofxMaxim/libs/maxiMFCC.cpp; sourceTree = SOURCE_ROOT; };
 		3B0A43681A2CB98A000ADA46 /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
 		3B0A43691A2CB98A000ADA46 /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
+		3B3572F91A39CCAD008AECF9 /* voice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = voice.cpp; sourceTree = "<group>"; };
+		3B3572FA1A39CCAD008AECF9 /* voice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = voice.h; sourceTree = "<group>"; };
 		3BECC8031A308EA6004798CA /* ofxBaseGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		3BECC8041A308EA6004798CA /* ofxBaseGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
 		3BECC8051A308EA6004798CA /* ofxButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButton.cpp; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				3B3572F91A39CCAD008AECF9 /* voice.cpp */,
+				3B3572FA1A39CCAD008AECF9 /* voice.h */,
 				3B0A43681A2CB98A000ADA46 /* button.h */,
 				3B0A43691A2CB98A000ADA46 /* button.cpp */,
 			);
@@ -428,6 +433,7 @@
 				3BECC8141A308EA6004798CA /* ofxBaseGui.cpp in Sources */,
 				3BECC8191A308EA6004798CA /* ofxSlider.cpp in Sources */,
 				909DC438310CD79EB64AD0C9 /* stb_vorbis.c in Sources */,
+				3B3572FB1A39CCAD008AECF9 /* voice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

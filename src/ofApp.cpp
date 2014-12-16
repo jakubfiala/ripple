@@ -22,10 +22,10 @@ void ofApp::setup(){
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
             buttons[x][y] = *new Button;
-            buttons[x][y].create(25+x*35, 45+y*35, 30, 30, "rect");
+            buttons[x][y].create(25+x*35, 45+y*35, 30, 30, "rect", (x*(y-1) + x) % 12 + 60);
         }
     play = *new Button;
-    play.create(25, 5, 30, 30, "tri");
+    play.create(25, 5, 30, 30, "tri", 0);
     playback = false;
     
     //load font and stuff
@@ -39,6 +39,8 @@ void ofApp::setup(){
     newWave.isOn = false;
     ptime = time = 0;
     
+    curNote = 48;
+    voiceCount = 0;
     
     sampleRate 			= 44100; /* Sampling Rate */
     initialBufferSize	= 512;
@@ -73,6 +75,18 @@ void ofApp::beat() {
                     if (((x <= newWave.startX + newWave.iteration) && (x >= newWave.startX - newWave.iteration)) && ((y <= newWave.startY + newWave.iteration) && (y >= newWave.startY - newWave.iteration)) && !(((x < newWave.startX + newWave.iteration) && (x > newWave.startX - newWave.iteration)) && ((y < newWave.startY + newWave.iteration) && (y > newWave.startY - newWave.iteration)))) {
                         
                         buttons[x][y].lightUp();
+                        if (buttons[x][y].checkIfOn()) {
+                            curNote = buttons[x][y].getNote();
+                            Voice v = *new Voice(curNote, adsrData);
+                            
+                            //if we're using all voices, delete the first one so we can add the new one
+                            if (voices.size() >= 16) {
+                                voices.pop_front();
+                            }
+                            
+                            v.start();
+                            voices.push_back(v);
+                        }
                     }
                 }
         }
@@ -91,16 +105,6 @@ double ofApp::getBeatTime(double tempo) {
 //--------------------------------------------------------------
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
-    
-    
-    //search for playing voices (once per buffer)
-
-    for (int i = 0; i < sizeof(voices); i++) {
-        if (voices[i].isOn) {
-            
-        }
-    }
-    
     //run timer with a phasor
     time = timer.phasor(64, 0, 16);
     //check if we should play on-beat
@@ -110,10 +114,19 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     //previous time will be current time next time
     ptime = time;
     
+    
+    
+    
     for (int i = 0; i < bufferSize; i++){
         
+//        double adsrOut = adsr.line(8, adsrData);
+//        double synthOut = synth.triangle(curNote);
         
-        //mix.stereo(, <#double *two#>, <#double x#>)
+        double out = 0;
+        for (int v = 0; v < voices.size(); v++)
+            out += voices[v].oscOut("sine");
+        
+        mix.stereo(out, outputs, 0.5);
         
         output[i*nChannels] = outputs[0];
         output[i*nChannels+1] = outputs[1];
