@@ -223,6 +223,8 @@ void ofApp::mousePressed(int mx, int my, int button){
     if (play.checkIfPressed(mx, my)) {
         play.toggleButton();
         playback = !playback;
+        newWave.iteration = 0;
+        if (!playback) newWave.isOn = false;
         startTime = ofGetElapsedTimeMillis();
     };
     
