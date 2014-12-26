@@ -4,7 +4,6 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
-#include "ofxUI.h"
 #include "button.h"
 #include "voice.h"
 #include <deque>

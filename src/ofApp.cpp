@@ -19,7 +19,6 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
     
     //create UI
-    //gui = new ofxUICanvas();
     
     //create buttons
     for(int x = 0; x < 28; x++)
