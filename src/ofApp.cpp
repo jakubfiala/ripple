@@ -28,6 +28,10 @@ void ofApp::setup(){
     play.create(25, 5, 30, 30, "tri", 0);
     playback = false;
     
+    midiOn = *new Button;
+    midiOn.create(100, 5, 30, 30, "rect", 0);
+    isMidi = false;
+    
     //load font and stuff
     text.loadFont("verdana.ttf",20,true,true);
     text.setLineHeight(25.0f);
@@ -69,7 +73,9 @@ void ofApp::draw(){
             buttons[x][y].display();
         }
     play.display();
+    midiOn.display();
     text.drawString("RIPPLE", 900, 35);
+    text.drawString("midi on/off", 135, 30);
 }
 
 void ofApp::beat() {
@@ -94,7 +100,7 @@ void ofApp::beat() {
                             v.start();
                             voices.push_back(v);
                             
-                            midiOut.sendNoteOn(1, curNote);
+                            if (isMidi) midiOut.sendNoteOn(1, curNote);
                         }
                     }
                 }
@@ -134,12 +140,14 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
         double out = 0;
         for (int v = 0; v < voices.size(); v++) {
             if (voices[v].isActive() && voices[v].env.valindex >= 6) {
-                printf("bla");
-                voices[v].stop();
-                midiOut.sendNoteOff(1, voices[v].note);
+                
+                if (isMidi) {
+                    voices[v].stop();
+                    midiOut.sendNoteOff(1, voices[v].note);
+                }
             }
             double oscOut = voices[v].oscOut("sine");
-            //out += oscOut;
+            if (!isMidi) out += oscOut;
         }
         
         
@@ -233,6 +241,11 @@ void ofApp::mousePressed(int mx, int my, int button){
         newWave.iteration = 0;
         if (!playback) newWave.isOn = false;
         startTime = ofGetElapsedTimeMillis();
+    };
+    
+    if (midiOn.checkIfPressed(mx, my)) {
+        isMidi = !isMidi;
+        midiOn.toggleButton();
     };
     
 }

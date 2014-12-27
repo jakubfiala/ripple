@@ -41,6 +41,7 @@ protected:
     
     Button buttons[28][16];
     Button play;
+    Button midiOn;
     Boolean playback;
     ofTrueTypeFont text;
     
@@ -62,6 +63,8 @@ protected:
     double adsrData[8] = {0,1,1.0,20,0.125,125,0,500};
     
     ofxMidiOut midiOut;
+    Boolean isMidi;
+    
 };
 
 #endif
