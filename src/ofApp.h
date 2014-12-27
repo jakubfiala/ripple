@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofxMaxim.h"
+#include "ofxMidi.h"
 #include "button.h"
 #include "voice.h"
 #include <deque>
@@ -16,6 +17,7 @@ public:
     void setup();
     void update();
     void draw();
+    void exit();
     
     void keyPressed  (int key);
     void keyReleased(int key);
@@ -34,17 +36,14 @@ public:
     double outputs[2];
     ofxMaxiMix mix;
     
-    //void exit();
-   // void guiEvent(ofxUIEventArgs &e);
-    
     
 protected:
-   // ofxUICanvas *gui;
     
     Button buttons[28][16];
     Button play;
     Boolean playback;
     ofTrueTypeFont text;
+    
     double startTime, bpm;
     struct wave {
         Boolean isOn;
@@ -53,6 +52,7 @@ protected:
         int iteration;
     } newWave;
     void beat();
+    
     double getBeatTime(double tempo);
     maxiOsc timer, synth;
     int time, ptime, voiceCount, curNote;
@@ -61,6 +61,7 @@ protected:
     deque<Voice> voices;
     double adsrData[8] = {0,1,1.0,20,0.125,125,0,500};
     
+    ofxMidiOut midiOut;
 };
 
 #endif

@@ -18,15 +18,16 @@ class Voice {
         Voice(int midiNote, double * data);
         double oscOut(string type);
         void start();
-        void isActive();
-    
-    private:
+        void stop();
+        bool isActive();
+        double freq;
+        double vol;
+        double note;
         maxiOsc osc;
         maxiEnvelope env;
         convert converter;
         Boolean active = false;
-        double freq;
-        double vol;
+    
         double * envData;
 };
 

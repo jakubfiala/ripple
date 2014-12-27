@@ -18,8 +18,6 @@ void ofApp::setup(){
     ofBackground(200);
     ofSetVerticalSync(true);
     
-    //create UI
-    
     //create buttons
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
@@ -48,13 +46,13 @@ void ofApp::setup(){
     initialBufferSize	= 512;
     
     
+    //init midi
+    midiOut.listPorts();
+    
+    midiOut.openPort(0);
+    
     ofSoundStreamSetup(2,0,this, sampleRate, initialBufferSize, 4);
     
-    
-   /* gui->addSlider("BACKGROUND",0.0,255.0,100.0);
-    gui->autoSizeToFitWidgets();
-    ofAddListener(gui->newGUIEvent, this, &ofApp::guiEvent);
-    gui->loadSettings("settings.xml");*/
 }
 
 //--------------------------------------------------------------
@@ -95,6 +93,8 @@ void ofApp::beat() {
                             
                             v.start();
                             voices.push_back(v);
+                            
+                            midiOut.sendNoteOn(1, curNote);
                         }
                     }
                 }
@@ -132,8 +132,16 @@ void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
 //        double synthOut = synth.triangle(curNote);
         
         double out = 0;
-        for (int v = 0; v < voices.size(); v++)
-            out += voices[v].oscOut("sine");
+        for (int v = 0; v < voices.size(); v++) {
+            if (voices[v].isActive() && voices[v].env.valindex >= 6) {
+                printf("bla");
+                voices[v].stop();
+                midiOut.sendNoteOff(1, voices[v].note);
+            }
+            double oscOut = voices[v].oscOut("sine");
+            //out += oscOut;
+        }
+        
         
         mix.stereo(out, outputs, 0.5);
         
@@ -239,18 +247,9 @@ void ofApp::windowResized(int w, int h){
     
 }
 
-/*void ofApp::exit()
-{
-    gui->saveSettings("settings.xml");
-    delete gui;
+void ofApp::exit() {
+    
+    // clean up
+    midiOut.closePort();
 }
-
-void ofApp::guiEvent(ofxUIEventArgs &e)
-{
-    if(e.getName() == "BACKGROUND")
-    {
-        ofxUISlider *slider = e.getSlider();
-        ofBackground(slider->getScaledValue());
-    }
-}*/
 

@@ -28,6 +28,7 @@ double Voice::oscOut(string type)
 
 Voice::Voice(int midiNote, double * data)
 {
+    note = midiNote;
     freq = converter.mtof(midiNote);
     active = true;
     envData = data;
@@ -38,6 +39,12 @@ void Voice::start()
     env.trigger(0, envData[0]);
 }
 
-void Voice::isActive() {
+void Voice::stop()
+{
+    env.valindex = 0;
+    active = false;
+}
+
+bool Voice::isActive() {
     return active;
 }
