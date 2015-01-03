@@ -5,9 +5,11 @@
 #include "ofMain.h"
 #include "ofxMaxim.h"
 #include "ofxMidi.h"
+#include "ofxGui.h"
 #include "button.h"
 #include "voice.h"
 #include <deque>
+#include <cmath>
 
 
 class ofApp : public ofBaseApp{
@@ -30,6 +32,8 @@ public:
     void audioRequested 	(float * input, int bufferSize, int nChannels);
     void audioReceived 	(float * input, int bufferSize, int nChannels);
     
+    void tempoChanged(double & t);
+    
     int		initialBufferSize;
     int		sampleRate;
     
@@ -38,12 +42,16 @@ public:
     
     
 protected:
+    ofxSlider<double> tempoSlider;
     
     Button buttons[28][16];
     Button play;
     Button midiOn;
+    Button mappingButton;
+    Button waveButton;
     Boolean playback;
     ofTrueTypeFont text;
+    ofTrueTypeFont smalltext;
     
     double startTime, bpm;
     struct wave {
@@ -53,8 +61,9 @@ protected:
         int iteration;
     } newWave;
     void beat();
+    void triggerStuff(int x, int y);
     
-    double getBeatTime(double tempo);
+    double tempo;
     maxiOsc timer, synth;
     int time, ptime, voiceCount, curNote;
     maxiEnvelope adsr;
@@ -64,6 +73,8 @@ protected:
     
     ofxMidiOut midiOut;
     Boolean isMidi;
+    string mapping;
+    string wavetype;
     
 };
 

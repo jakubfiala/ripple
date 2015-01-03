@@ -78,6 +78,10 @@ int Button::getNote() {
     return note;
 }
 
+void Button::setNote(int n) {
+    note = n;
+}
+
 
 
 

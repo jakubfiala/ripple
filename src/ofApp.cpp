@@ -22,20 +22,37 @@ void ofApp::setup(){
     for(int x = 0; x < 28; x++)
         for (int y = 0; y < 16; y++) {
             buttons[x][y] = *new Button;
-            buttons[x][y].create(25+x*35, 45+y*35, 30, 30, "rect", (x*(y-1) + x) % 12 + 60);
+            buttons[x][y].create(25+x*35, 45+y*35, 30, 30, "rect", x + y + 48);
         }
     play = *new Button;
     play.create(25, 5, 30, 30, "tri", 0);
     playback = false;
     
     midiOn = *new Button;
-    midiOn.create(100, 5, 30, 30, "rect", 0);
+    midiOn.create(100, 5, 15, 15, "rect", 0);
     isMidi = false;
+    
+    mappingButton = *new Button;
+    mappingButton.create(100, 25, 15, 15, "rect", 0);
+    mapping = "standard";
+    
+    waveButton = *new Button;
+    waveButton.create(450, 5, 15, 15, "rect", 0);
+    wavetype = "square";
+    
+    tempoSlider.setup("Tempo:", 120.0, 30.0, 240.0);
+    tempoSlider.addListener(this, & ofApp::tempoChanged);
+    tempoSlider.setPosition(450, 25);
+    tempo = 120.0;
     
     //load font and stuff
     text.loadFont("verdana.ttf",20,true,true);
     text.setLineHeight(25.0f);
     text.setLetterSpacing(1.037);
+    
+    smalltext.loadFont("verdana.ttf",10,true,true);
+    smalltext.setLineHeight(17.0f);
+    smalltext.setLetterSpacing(1.037);
     
     //init time stuff
     startTime = 0.0;
@@ -74,8 +91,16 @@ void ofApp::draw(){
         }
     play.display();
     midiOn.display();
+    mappingButton.display();
+    waveButton.display();
+    tempoSlider.draw();
+    if (playback) ofSetColor(0, 255, 0);
+    else ofSetColor(0);
     text.drawString("RIPPLE", 900, 35);
-    text.drawString("midi on/off", 135, 30);
+    ofSetColor(0);
+    smalltext.drawString("midi off/on (on disables in-app sound)", 120, 15);
+    smalltext.drawString("mapping standard/one octave", 120, 35);
+    smalltext.drawString("wave square/line", 470, 15);
 }
 
 void ofApp::beat() {
@@ -85,24 +110,22 @@ void ofApp::beat() {
             for(int x = 0; x < 28; x++)
                 for (int y = 0; y < 16; y++) {
                     //monstrous statement to select buttons corresponding to the current iteration
-                    if (((x <= newWave.startX + newWave.iteration) && (x >= newWave.startX - newWave.iteration)) && ((y <= newWave.startY + newWave.iteration) && (y >= newWave.startY - newWave.iteration)) && !(((x < newWave.startX + newWave.iteration) && (x > newWave.startX - newWave.iteration)) && ((y < newWave.startY + newWave.iteration) && (y > newWave.startY - newWave.iteration)))) {
-                        
-                        buttons[x][y].lightUp();
-                        if (buttons[x][y].checkIfOn()) {
-                            curNote = buttons[x][y].getNote();
-                            Voice v = *new Voice(curNote, adsrData);
+                    if (wavetype == "square")
+                    {
+                        if (((x <= newWave.startX + newWave.iteration) && (x >= newWave.startX - newWave.iteration)) && ((y <= newWave.startY + newWave.iteration) && (y >= newWave.startY - newWave.iteration)) && !(((x < newWave.startX + newWave.iteration) && (x > newWave.startX - newWave.iteration)) && ((y < newWave.startY + newWave.iteration) && (y > newWave.startY - newWave.iteration))))
+                        {
+                            triggerStuff(x,y);
                             
-                            //if we're using all voices, delete the first one so we can add the new one
-                            if (voices.size() >= 16) {
-                                voices.pop_front();
-                            }
-                            
-                            v.start();
-                            voices.push_back(v);
-                            
-                            if (isMidi) midiOut.sendNoteOn(1, curNote);
                         }
                     }
+                    else if (wavetype == "line")
+                    {
+                        if (x == newWave.startX + newWave.iteration)
+                        {
+                            triggerStuff(x,y);
+                        }
+                    }
+                    
                 }
         }
         else {
@@ -111,8 +134,22 @@ void ofApp::beat() {
     }
 }
 
-double ofApp::getBeatTime(double tempo) {
-    return 60000/tempo;
+void ofApp::triggerStuff(int x, int y) {
+    buttons[x][y].lightUp();
+    if (buttons[x][y].checkIfOn()) {
+        curNote = buttons[x][y].getNote();
+        Voice v = *new Voice(curNote, adsrData);
+        
+        //if we're using all voices, delete the first one so we can add the new one
+        if (voices.size() >= 16) {
+            voices.pop_front();
+        }
+        
+        v.start();
+        voices.push_back(v);
+        
+        if (isMidi) midiOut.sendNoteOn(1, curNote);
+    }
 }
 
 
@@ -120,22 +157,17 @@ double ofApp::getBeatTime(double tempo) {
 //--------------------------------------------------------------
 void ofApp::audioRequested 	(float * output, int bufferSize, int nChannels){
     
-    //run timer with a phasor
-    time = timer.phasor(64, 0, 16);
-    //check if we should play on-beat
-    if (playback && time != ptime && ptime != 16) {
-        beat();
-    }
-    //previous time will be current time next time
-    ptime = time;
-    
     
     
     
     for (int i = 0; i < bufferSize; i++){
         
-//        double adsrOut = adsr.line(8, adsrData);
-//        double synthOut = synth.triangle(curNote);
+        //run timer with a phasor
+        time = timer.phasor(tempo/60, 0, 16);
+        //check if we should play on-beat
+        if (playback && time == 16) beat();
+        //previous time will be current time next time
+        ptime = time;
         
         double out = 0;
         for (int v = 0; v < voices.size(); v++) {
@@ -183,6 +215,10 @@ void ofApp::keyPressed(int key){
         startTime = ofGetElapsedTimeMillis();
     }
         
+}
+
+void ofApp::tempoChanged(double & t) {
+    tempo = t;
 }
 
 //--------------------------------------------------------------
@@ -246,6 +282,38 @@ void ofApp::mousePressed(int mx, int my, int button){
     if (midiOn.checkIfPressed(mx, my)) {
         isMidi = !isMidi;
         midiOn.toggleButton();
+    };
+    
+    if (mappingButton.checkIfPressed(mx, my)) {
+        mappingButton.toggleButton();
+        if (mapping == "standard")
+        {
+            mapping = "1octave";
+            for(int x = 0; x < 28; x++)
+                for (int y = 0; y < 16; y++) {
+                    buttons[x][y].setNote((x*(y-1) + x) % 12 + 60);
+                }
+        }
+        else
+        {
+            mapping = "standard";
+            for(int x = 0; x < 28; x++)
+                for (int y = 0; y < 16; y++) {
+                    buttons[x][y].setNote(x + y + 24);
+                }
+        }
+    }
+    
+    if (waveButton.checkIfPressed(mx, my)) {
+        waveButton.toggleButton();
+        if (wavetype == "square")
+        {
+            wavetype = "line";
+        }
+        else
+        {
+            wavetype = "square";
+        }
     };
     
 }

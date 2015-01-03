@@ -17,6 +17,7 @@ class Button {
         void lightUp();
         void create(float pX, float pY, float w, float h, string t, int n);
         void display();
+        void setNote(int n);
     
     protected:
         float posX, posY, width, height, alpha;
